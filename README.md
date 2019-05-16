@@ -1,4 +1,5 @@
 # RPC
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 
 最近看到旷视南京研究院发布的一个新零售自动结算场景下的大型商品数据集RPC（[Project](<https://rpc-dataset.github.io/>)，[Paper](<https://arxiv.org/abs/1901.07249>)）。
 
@@ -82,4 +83,8 @@ Syn+Render：用合成图像以及渲染图像一起去训练。
 下图是论文中展示的流程图，我正是根据这个流程图来复现论文中的效果，其过程在中有详细记录。
 
 ![Pipeline](<https://github.com/tongyuhome/rpc/raw/master/show_images/Pipeline.png>)
+
+
+
+[啊](<a href="https://www.codecogs.com/eqnedit.php?latex=$CD_{i,k}$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?$CD_{i,k}$" title="$CD_{i,k}$" /></a>)
 
