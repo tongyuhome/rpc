@@ -31,24 +31,32 @@ train2019,val2019,test2019三个文件夹，分别包含了53739(8.54GB)，6000(
 
 和instances_train2019,instances_val2019,instances_test2019三个json格式文件，每个json文件都包含了info，licenses，categories，__raw_Chinese_name_df，images，annotations六种信息。
 
-对于前四种信息，三个json文件的内容都是一样的，info和licenses记录了这个项目的一些基本信息，categories和raw_Chinese_name_df则记录了200种商品的基本信息：分别展示[‘categories’]-[0]和[‘raw_Chinese_name_df’]-[0]
-{'supercategory': 'puffed_food', 'id': 1, 'name': '1_puffed_food'}  
-{'sku_name': '1_puffed_food', 'category_id': 1, 'sku_class': 'puffed_food', 'code': 6909409012031, 'shelf': 1, 'num': 4, 'name': '上好佳荷兰豆55g', 'clas': '膨化食品', 'known': True, 'ind': 0}
+对于前四种信息，三个json文件的内容都是一样的，info和licenses记录了这个项目的一些基本信息，categories和raw_Chinese_name_df则记录了200种商品的基本信息，images和annotations则是对每张图的内容做一个说明和注释.。
 
-images和annotations则是对每张图的内容做一个说明和注释：分别展示[‘images’]-[0]和[‘annotations’]-[0]
+| categories    | Chinese_name | images    | annotations  |
+| ------------- | ------------ | --------- | ------------ |
+| supercategory | sku_name     | file_name | area         |
+| id            | category_id  | width     | bbox         |
+| name          | sku_class    | height    | category_id  |
+|               | code         | id        | id           |
+|               | shelf        |           | image_id     |
+|               | num          |           | iscrowd      |
+|               | name         |           | segmentation |
+|               | clas         |           | point_xy     |
+|               | known        |           |              |
+|               | ind          |           |              |
 
-{'file_name': 'xx.jpg', 'width': xx, 'height': xx, 'id': xx}  
-{'area': xx, 'bbox': [xx, xx, xx, xx], 'category_id': xx, 'id': xx, 'image_id': xx, 'iscrowd': xx, 'segmentation': [[]], 'point_xy': [xx, xx]}
+
+
 
 ## 实验
 
 在说实验之前，先提及一下论文中提出的几个指标，这是判断检测器效果好坏的客观依据。
 
-先定义各符号所表示的意思。从$K$类商品中选出N件商品，$P_{i,k}$ 表示第$i$张图中$k$类商品的预测数量，$GT_{i,k}$表示第$i$张图中$k$类商品的真实数量，$CD_{i,k}$表示$P_{i,k}$和$GT_{i,k}$之间的$l_{1}$距离，能反映出图中某一类别商品的错误计数，$CD_{i}$反映第$i$张图中所有$K$类商品的预测误差，$CD_{i}$为0的话表示预测完全正确。
-$$
-CD_{i,k} = |P_{i,k} - GT_{i,k}| \\
-CD_{i} = \sum_{k=1}^{K}CD_{i,k}
-$$
+先定义各符号所表示的意思。从<a href="https://www.codecogs.com/eqnedit.php?latex=K" target="_blank"><img src="https://latex.codecogs.com/gif.latex?K" title="K" /></a>类商品中选出N件商品，<a href="https://www.codecogs.com/eqnedit.php?latex=P_{i,k}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P_{i,k}" title="P_{i,k}" /></a>表示第<a href="https://www.codecogs.com/eqnedit.php?latex=i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?i" title="i" /></a>张图中<a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a>类商品的预测数量，<a href="https://www.codecogs.com/eqnedit.php?latex=GT_{i,k}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?GT_{i,k}" title="GT_{i,k}" /></a>表示第<a href="https://www.codecogs.com/eqnedit.php?latex=i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?i" title="i" /></a>张图中<a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a>类商品的真实数量，<a href="https://www.codecogs.com/eqnedit.php?latex=CD_{i,k}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?CD_{i,k}" title="CD_{i,k}" /></a>表示<a href="https://www.codecogs.com/eqnedit.php?latex=P_{i,k}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P_{i,k}" title="P_{i,k}" /></a>和<a href="https://www.codecogs.com/eqnedit.php?latex=GT_{i,k}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?GT_{i,k}" title="GT_{i,k}" /></a>之间的<a href="https://www.codecogs.com/eqnedit.php?latex=l_{1}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?l_{1}" title="l_{1}" /></a>距离，能反映出图中某一类别商品的错误计数：<a href="https://www.codecogs.com/eqnedit.php?latex=CD_{i,k}&space;=&space;|P_{i,k}&space;-&space;GT_{i,k}|" target="_blank"><img src="https://latex.codecogs.com/gif.latex?CD_{i,k}&space;=&space;|P_{i,k}&space;-&space;GT_{i,k}|" title="CD_{i,k} = |P_{i,k} - GT_{i,k}|" /></a>
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=CD_{i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?CD_{i}" title="CD_{i}" /></a>反映第<a href="https://www.codecogs.com/eqnedit.php?latex=i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?i" title="i" /></a>张图中所有<a href="https://www.codecogs.com/eqnedit.php?latex=K" target="_blank"><img src="https://latex.codecogs.com/gif.latex?K" title="K" /></a>类商品的预测误差，<a href="https://www.codecogs.com/eqnedit.php?latex=CD_{i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?CD_{i}" title="CD_{i}" /></a>为0的话表示预测完全正确：<a href="https://www.codecogs.com/eqnedit.php?latex=CD_{i}&space;=&space;\sum_{k=1}^{K}CD_{i,k}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?CD_{i}&space;=&space;\sum_{k=1}^{K}CD_{i,k}" title="CD_{i} = \sum_{k=1}^{K}CD_{i,k}" /></a>
+
 **Checkout Accuracy (cAcc):**结账准确率，表示检测过程中$CD_{i} = 0$发生的概率。$\delta()$当且仅当$\sum_{k=1}^{K}CD_{i,k}=0$时为$1$否则为$0$，所以$cAcc$的取值范围是$[0,1]$
 $$
 cAcc=\frac{\sum_{i=1}^{N}\delta(\sum_{k=1}^{K}CD_{i,k},\quad0)}{N}
@@ -84,6 +92,4 @@ Syn+Render：用合成图像以及渲染图像一起去训练。
 
 ![Pipeline](<https://github.com/tongyuhome/rpc/raw/master/show_images/Pipeline.png>)
 
-
-<a href="https://www.codecogs.com/eqnedit.php?latex=$CD_{i,k}$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?$CD_{i,k}$" title="$CD_{i,k}$" /></a>
-
+<a href="https://www.codecogs.com/eqnedit.php?latex=$CD_{i,k}$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?$CD_{i,k}quot; title="$CD_{i,k}quot; /></a>
