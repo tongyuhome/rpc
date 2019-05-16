@@ -95,4 +95,4 @@ Syn+Render：用合成图像以及渲染图像一起去训练。
 
 中有详细记录。
 
-![Pipeline](<https://github.com/tongyuhome/rpc/raw/master/show_images/Pipeline.png>)
+![Pipeline](<https://github.com/tongyuhome/rpc/blob/master/show_images/Pipeline.png>)
