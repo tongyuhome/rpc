@@ -53,28 +53,31 @@ train2019,val2019,test2019三个文件夹，分别包含了53739(8.54GB)，6000(
 
 在说实验之前，先提及一下论文中提出的几个指标，这是判断检测器效果好坏的客观依据。
 
-先定义各符号所表示的意思。从<a href="https://www.codecogs.com/eqnedit.php?latex=K" target="_blank"><img src="https://latex.codecogs.com/gif.latex?K" title="K" /></a>类商品中选出N件商品，<a href="https://www.codecogs.com/eqnedit.php?latex=P_{i,k}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P_{i,k}" title="P_{i,k}" /></a>表示第<a href="https://www.codecogs.com/eqnedit.php?latex=i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?i" title="i" /></a>张图中<a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a>类商品的预测数量，<a href="https://www.codecogs.com/eqnedit.php?latex=GT_{i,k}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?GT_{i,k}" title="GT_{i,k}" /></a>表示第<a href="https://www.codecogs.com/eqnedit.php?latex=i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?i" title="i" /></a>张图中<a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a>类商品的真实数量，<a href="https://www.codecogs.com/eqnedit.php?latex=CD_{i,k}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?CD_{i,k}" title="CD_{i,k}" /></a>表示<a href="https://www.codecogs.com/eqnedit.php?latex=P_{i,k}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P_{i,k}" title="P_{i,k}" /></a>和<a href="https://www.codecogs.com/eqnedit.php?latex=GT_{i,k}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?GT_{i,k}" title="GT_{i,k}" /></a>之间的<a href="https://www.codecogs.com/eqnedit.php?latex=l_{1}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?l_{1}" title="l_{1}" /></a>距离，能反映出图中某一类别商品的错误计数：<a href="https://www.codecogs.com/eqnedit.php?latex=CD_{i,k}&space;=&space;|P_{i,k}&space;-&space;GT_{i,k}|" target="_blank"><img src="https://latex.codecogs.com/gif.latex?CD_{i,k}&space;=&space;|P_{i,k}&space;-&space;GT_{i,k}|" title="CD_{i,k} = |P_{i,k} - GT_{i,k}|" /></a>
+先定义各符号所表示的意思。从<a href="https://www.codecogs.com/eqnedit.php?latex=K" target="_blank"><img src="https://latex.codecogs.com/gif.latex?K" title="K" /></a>类商品中选出N件商品，<a href="https://www.codecogs.com/eqnedit.php?latex=P_{i,k}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P_{i,k}" title="P_{i,k}" /></a>表示第<a href="https://www.codecogs.com/eqnedit.php?latex=i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?i" title="i" /></a>张图中<a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a>类商品的预测数量，<a href="https://www.codecogs.com/eqnedit.php?latex=GT_{i,k}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?GT_{i,k}" title="GT_{i,k}" /></a>表示第<a href="https://www.codecogs.com/eqnedit.php?latex=i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?i" title="i" /></a>张图中<a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a>类商品的真实数量，<a href="https://www.codecogs.com/eqnedit.php?latex=CD_{i,k}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?CD_{i,k}" title="CD_{i,k}" /></a>表示<a href="https://www.codecogs.com/eqnedit.php?latex=P_{i,k}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P_{i,k}" title="P_{i,k}" /></a>和<a href="https://www.codecogs.com/eqnedit.php?latex=GT_{i,k}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?GT_{i,k}" title="GT_{i,k}" /></a>之间的<a href="https://www.codecogs.com/eqnedit.php?latex=l_{1}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?l_{1}" title="l_{1}" /></a>距离，能反映出图中某一类别商品的错误计数：
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=CD_{i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?CD_{i}" title="CD_{i}" /></a>反映第<a href="https://www.codecogs.com/eqnedit.php?latex=i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?i" title="i" /></a>张图中所有<a href="https://www.codecogs.com/eqnedit.php?latex=K" target="_blank"><img src="https://latex.codecogs.com/gif.latex?K" title="K" /></a>类商品的预测误差，<a href="https://www.codecogs.com/eqnedit.php?latex=CD_{i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?CD_{i}" title="CD_{i}" /></a>为0的话表示预测完全正确：<a href="https://www.codecogs.com/eqnedit.php?latex=CD_{i}&space;=&space;\sum_{k=1}^{K}CD_{i,k}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?CD_{i}&space;=&space;\sum_{k=1}^{K}CD_{i,k}" title="CD_{i} = \sum_{k=1}^{K}CD_{i,k}" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=CD_{i,k}&space;=&space;|P_{i,k}&space;-&space;GT_{i,k}|" target="_blank"><img src="https://latex.codecogs.com/gif.latex?CD_{i,k}&space;=&space;|P_{i,k}&space;-&space;GT_{i,k}|" title="CD_{i,k} = |P_{i,k} - GT_{i,k}|" /></a>
 
-**Checkout Accuracy (cAcc):**结账准确率，表示检测过程中$CD_{i} = 0$发生的概率。$\delta()$当且仅当$\sum_{k=1}^{K}CD_{i,k}=0$时为$1$否则为$0$，所以$cAcc$的取值范围是$[0,1]$
-$$
-cAcc=\frac{\sum_{i=1}^{N}\delta(\sum_{k=1}^{K}CD_{i,k},\quad0)}{N}
-=\frac{\sum_{i=1}^{N}\delta(CD_{i},\quad0)}{N}
-$$
+<a href="https://www.codecogs.com/eqnedit.php?latex=CD_{i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?CD_{i}" title="CD_{i}" /></a>反映第<a href="https://www.codecogs.com/eqnedit.php?latex=i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?i" title="i" /></a>张图中所有<a href="https://www.codecogs.com/eqnedit.php?latex=K" target="_blank"><img src="https://latex.codecogs.com/gif.latex?K" title="K" /></a>类商品的预测误差，<a href="https://www.codecogs.com/eqnedit.php?latex=CD_{i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?CD_{i}" title="CD_{i}" /></a>为0的话表示预测完全正确：
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=CD_{i}&space;=&space;\sum_{k=1}^{K}CD_{i,k}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?CD_{i}&space;=&space;\sum_{k=1}^{K}CD_{i,k}" title="CD_{i} = \sum_{k=1}^{K}CD_{i,k}" /></a>
+
+**Checkout Accuracy (cAcc):**结账准确率，表示检测过程中<a href="https://www.codecogs.com/eqnedit.php?latex=CD_{i}&space;=&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?CD_{i}&space;=&space;0" title="CD_{i} = 0" /></a>发生的概率。<a href="https://www.codecogs.com/eqnedit.php?latex=\delta()" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\delta()" title="\delta()" /></a>当且仅当<a href="https://www.codecogs.com/eqnedit.php?latex=\sum_{k=1}^{K}CD_{i,k}=0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\sum_{k=1}^{K}CD_{i,k}=0" title="\sum_{k=1}^{K}CD_{i,k}=0" /></a>时为1否则为0，所以<a href="https://www.codecogs.com/eqnedit.php?latex=cAcc" target="_blank"><img src="https://latex.codecogs.com/gif.latex?cAcc" title="cAcc" /></a>的取值范围是<a href="https://www.codecogs.com/eqnedit.php?latex=[0,1]" target="_blank"><img src="https://latex.codecogs.com/gif.latex?[0,1]" title="[0,1]" /></a>：
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=cAcc=\frac{\sum_{i=1}^{N}\delta(\sum_{k=1}^{K}CD_{i,k},\quad0)}{N}&space;=\frac{\sum_{i=1}^{N}\delta(CD_{i},\quad0)}{N}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?cAcc=\frac{\sum_{i=1}^{N}\delta(\sum_{k=1}^{K}CD_{i,k},\quad0)}{N}&space;=\frac{\sum_{i=1}^{N}\delta(CD_{i},\quad0)}{N}" title="cAcc=\frac{\sum_{i=1}^{N}\delta(\sum_{k=1}^{K}CD_{i,k},\quad0)}{N} =\frac{\sum_{i=1}^{N}\delta(CD_{i},\quad0)}{N}" /></a>
+
 **Average Counting Distance (ACD):**平均计数距离，表示每个图像的平均计数错误。
-$$
-ACD=\frac{1}{N}\sum_{i=1}^{N}\sum_{k=1}^{K}CD_{i,k}=\frac{1}{N}\sum_{i=1}^{N}CD_{i}
-$$
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=ACD=\frac{1}{N}\sum_{i=1}^{N}\sum_{k=1}^{K}CD_{i,k}=\frac{1}{N}\sum_{i=1}^{N}CD_{i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?ACD=\frac{1}{N}\sum_{i=1}^{N}\sum_{k=1}^{K}CD_{i,k}=\frac{1}{N}\sum_{i=1}^{N}CD_{i}" title="ACD=\frac{1}{N}\sum_{i=1}^{N}\sum_{k=1}^{K}CD_{i,k}=\frac{1}{N}\sum_{i=1}^{N}CD_{i}" /></a>
+
 **Mean Category Counting Distance (mCCD):**平均类别计数距离，表示每个商品类别的计数误差的平均比率。
-$$
-mCCD=\frac{1}{K}\sum_{i=1}^{N}\frac{\sum_{i=1}^{N}CD_{i,k}}{\sum_{k=1}^{K}GT_{i,k}}
-$$
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=mCCD=\frac{1}{K}\sum_{i=1}^{N}\frac{\sum_{i=1}^{N}CD_{i,k}}{\sum_{k=1}^{K}GT_{i,k}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?mCCD=\frac{1}{K}\sum_{i=1}^{N}\frac{\sum_{i=1}^{N}CD_{i,k}}{\sum_{k=1}^{K}GT_{i,k}}" title="mCCD=\frac{1}{K}\sum_{i=1}^{N}\frac{\sum_{i=1}^{N}CD_{i,k}}{\sum_{k=1}^{K}GT_{i,k}}" /></a>
+
 **Mean Category Intersection of Union (mCIoU):**平均类别交并比，表示每个类别预测值和真实值之间误差的平均值，就是每个类别检测结果IoU的平均值。
-$$
-mCIoU=\frac{1}{K}\sum_{i=1}^{N}\frac{\sum_{i=1}^{N}min(GT_{i,k},P_{i,k})}{\sum_{i=1}^{N}max(GT_{i,k},P_{i,k})}
-$$
-除了以上四个指标，论文中还引用了$mAP50$和$mmAP$两个指标来客观验证检测效果的好坏。
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=mCIoU=\frac{1}{K}\sum_{i=1}^{N}\frac{\sum_{i=1}^{N}min(GT_{i,k},P_{i,k})}{\sum_{i=1}^{N}max(GT_{i,k},P_{i,k})}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?mCIoU=\frac{1}{K}\sum_{i=1}^{N}\frac{\sum_{i=1}^{N}min(GT_{i,k},P_{i,k})}{\sum_{i=1}^{N}max(GT_{i,k},P_{i,k})}" title="mCIoU=\frac{1}{K}\sum_{i=1}^{N}\frac{\sum_{i=1}^{N}min(GT_{i,k},P_{i,k})}{\sum_{i=1}^{N}max(GT_{i,k},P_{i,k})}" /></a>
+
+除了以上四个指标，论文中还引用了<a href="https://www.codecogs.com/eqnedit.php?latex=mAP50" target="_blank"><img src="https://latex.codecogs.com/gif.latex?mAP50" title="mAP50" /></a>和<a href="https://www.codecogs.com/eqnedit.php?latex=mmAP" target="_blank"><img src="https://latex.codecogs.com/gif.latex?mmAP" title="mmAP" /></a>两个指标来客观验证检测效果的好坏。
 
 论文中设置了四种不同的基线实验Single，Syn，Render和Syn+Render，这四个实验实际上是使用四种不同的数据集去训练相同的检测器。
 
@@ -91,5 +94,3 @@ Syn+Render：用合成图像以及渲染图像一起去训练。
 下图是论文中展示的流程图，我正是根据这个流程图来复现论文中的效果，其过程在中有详细记录。
 
 ![Pipeline](<https://github.com/tongyuhome/rpc/raw/master/show_images/Pipeline.png>)
-
-<a href="https://www.codecogs.com/eqnedit.php?latex=$CD_{i,k}$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?$CD_{i,k}quot; title="$CD_{i,k}quot; /></a>
