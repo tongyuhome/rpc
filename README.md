@@ -49,7 +49,7 @@ $$
 CD_{i,k} = |P_{i,k} - GT_{i,k}| \\
 CD_{i} = \sum_{k=1}^{K}CD_{i,k}
 $$
-**`Checkout Accuracy (cAcc):`**结账准确率，表示检测过程中$CD_{i} = 0$发生的概率。$\delta()$当且仅当$\sum_{k=1}^{K}CD_{i,k}=0$时为$1$否则为$0$，所以$cAcc$的取值范围是$[0,1]$
+**Checkout Accuracy (cAcc):**结账准确率，表示检测过程中$CD_{i} = 0$发生的概率。$\delta()$当且仅当$\sum_{k=1}^{K}CD_{i,k}=0$时为$1$否则为$0$，所以$cAcc$的取值范围是$[0,1]$
 $$
 cAcc=\frac{\sum_{i=1}^{N}\delta(\sum_{k=1}^{K}CD_{i,k},\quad0)}{N}
 =\frac{\sum_{i=1}^{N}\delta(CD_{i},\quad0)}{N}
