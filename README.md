@@ -1,7 +1,4 @@
 # RPC
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
-
-<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
 
 最近看到旷视南京研究院发布的一个新零售自动结算场景下的大型商品数据集RPC（[Project](<https://rpc-dataset.github.io/>)，[Paper](<https://arxiv.org/abs/1901.07249>)）。
 
@@ -13,7 +10,8 @@
 
 这个数据集一共拍摄了200种商品，在项目中有提供数据集，内容包括：
 
-train2019,val2019,test2019三个文件夹，分别包含了53739(8.54GB)，6000(1.23GB)，24000(4.95GB)个文件，均为JPG格式图像。训练数据集中每个图像包含了一件商品，置放在一个圆形展示台上，根据不同的摄像头位置和不同的圆台转动角度来分别拍摄。![拍摄商品](<https://github.com/tongyuhome/rpc/raw/master/show_images/take_pic.png>)
+train2019,val2019,test2019三个文件夹，分别包含了53739(8.54GB)，6000(1.23GB)，24000(4.95GB)个文件，均为JPG格式图像。训练数据集中每个图像包含了一件商品，置放在一个圆形展示台上，根据不同的摄像头位置和不同的圆台转动角度来分别拍摄。  
+![拍摄商品](<https://github.com/tongyuhome/rpc/raw/master/show_images/take_pic.png>)
 
 验证和测试数据集中每个图像包含了多个商品，置放在纯白色台面，根据摆放商品的个数和种类被分为了三个等级：Easy ，Medium ，Hard 。
 
@@ -34,12 +32,12 @@ train2019,val2019,test2019三个文件夹，分别包含了53739(8.54GB)，6000(
 和instances_train2019,instances_val2019,instances_test2019三个json格式文件，每个json文件都包含了info，licenses，categories，__raw_Chinese_name_df，images，annotations六种信息。
 
 对于前四种信息，三个json文件的内容都是一样的，info和licenses记录了这个项目的一些基本信息，categories和raw_Chinese_name_df则记录了200种商品的基本信息：分别展示[‘categories’]-[0]和[‘raw_Chinese_name_df’]-[0]
-{'supercategory': 'puffed_food', 'id': 1, 'name': '1_puffed_food'}
+{'supercategory': 'puffed_food', 'id': 1, 'name': '1_puffed_food'}  
 {'sku_name': '1_puffed_food', 'category_id': 1, 'sku_class': 'puffed_food', 'code': 6909409012031, 'shelf': 1, 'num': 4, 'name': '上好佳荷兰豆55g', 'clas': '膨化食品', 'known': True, 'ind': 0}
 
 images和annotations则是对每张图的内容做一个说明和注释：分别展示[‘images’]-[0]和[‘annotations’]-[0]
 
-{'file_name': 'xx.jpg', 'width': xx, 'height': xx, 'id': xx}
+{'file_name': 'xx.jpg', 'width': xx, 'height': xx, 'id': xx}  
 {'area': xx, 'bbox': [xx, xx, xx, xx], 'category_id': xx, 'id': xx, 'image_id': xx, 'iscrowd': xx, 'segmentation': [[]], 'point_xy': [xx, xx]}
 
 ## 实验
@@ -87,6 +85,5 @@ Syn+Render：用合成图像以及渲染图像一起去训练。
 ![Pipeline](<https://github.com/tongyuhome/rpc/raw/master/show_images/Pipeline.png>)
 
 
-
-[啊](<a href="https://www.codecogs.com/eqnedit.php?latex=$CD_{i,k}$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?$CD_{i,k}$" title="$CD_{i,k}$" /></a>)
+<a href="https://www.codecogs.com/eqnedit.php?latex=$CD_{i,k}$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?$CD_{i,k}$" title="$CD_{i,k}$" /></a>
 
