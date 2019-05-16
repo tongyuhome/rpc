@@ -1,5 +1,8 @@
 # RPC
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<img src="http://chart.googleapis.com/chart?cht=tx&chl= x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" style="border:none;">
+<img src="http://www.forkosh.com/mathtex.cgi? \Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}">
 
 最近看到旷视南京研究院发布的一个新零售自动结算场景下的大型商品数据集RPC（[Project](<https://rpc-dataset.github.io/>)，[Paper](<https://arxiv.org/abs/1901.07249>)）。
 
