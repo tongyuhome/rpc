@@ -11,7 +11,7 @@
 这个数据集一共拍摄了200种商品，在项目中有提供数据集，内容包括：
 
 train2019,val2019,test2019三个文件夹，分别包含了53739(8.54GB)，6000(1.23GB)，24000(4.95GB)个文件，均为JPG格式图像。训练数据集中每个图像包含了一件商品，置放在一个圆形展示台上，根据不同的摄像头位置和不同的圆台转动角度来分别拍摄。  
-![拍摄商品](<https://github.com/tongyuhome/rpc/raw/master/show_images/take_pic.png>)
+![拍摄商品](</show_images/take_pic.png>)
 
 验证和测试数据集中每个图像包含了多个商品，置放在纯白色台面，根据摆放商品的个数和种类被分为了三个等级：Easy ，Medium ，Hard 。
 
@@ -23,11 +23,11 @@ train2019,val2019,test2019三个文件夹，分别包含了53739(8.54GB)，6000(
 
 验证数据集：
 
-![val_easy](<https://github.com/tongyuhome/rpc/raw/master/show_images/val_1999.jpg>) ![val_medium](<https://github.com/tongyuhome/rpc/raw/master/show_images/val_4000.jpg>) ![val_hard](<https://github.com/tongyuhome/rpc/raw/master/show_images/val_6000.jpg>)
+![val_easy](<show_images/val_1999.jpg>) ![val_medium](<show_images/val_4000.jpg>) ![val_hard](<show_images/val_6000.jpg>)
 
 测试数据集：
 
-![test_easy](<https://github.com/tongyuhome/rpc/raw/master/show_images/test_8000.jpg>) ![test_medium](<https://github.com/tongyuhome/rpc/raw/master/show_images/test_16000.jpg>) ![test_hard](<https://github.com/tongyuhome/rpc/raw/master/show_images/test_24000.jpg>)
+![test_easy](<show_images/test_8000.jpg>) ![test_medium](<show_images/test_16000.jpg>) ![test_hard](<show_images/test_24000.jpg>)
 
 和instances_train2019,instances_val2019,instances_test2019三个json格式文件，每个json文件都包含了info，licenses，categories，__raw_Chinese_name_df，images，annotations六种信息。
 
@@ -91,8 +91,8 @@ Render：使用渲染图像去训练。对合成好的图像进行渲染，补�
 
 Syn+Render：用合成图像以及渲染图像一起去训练。
 
-下图是论文中展示的流程图，我正是根据这个流程图来复现论文中的效果，其过程在[Recurring_experiment](https://github.com/tongyuhome/rpc/raw/master/Recurring_experiment.md)
+下图是论文中展示的流程图，我正是根据这个流程图来复现论文中的效果，其过程在[Recurring_experiment](Recurring_experiment.md)
 
 中有详细记录。
 
-![Pipeline](<https://github.com/tongyuhome/rpc/blob/master/show_images/Pipeline.png>)
+![Pipeline](<show_images/Pipeline.png>)
