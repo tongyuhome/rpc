@@ -61,19 +61,19 @@ train2019,val2019,test2019三个文件夹，分别包含了53739(8.54GB)，6000(
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=CD_{i}&space;=&space;\sum_{k=1}^{K}CD_{i,k}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?CD_{i}&space;=&space;\sum_{k=1}^{K}CD_{i,k}" title="CD_{i} = \sum_{k=1}^{K}CD_{i,k}" /></a>
 
-**Checkout Accuracy (cAcc):**结账准确率，表示检测过程中<a href="https://www.codecogs.com/eqnedit.php?latex=CD_{i}&space;=&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?CD_{i}&space;=&space;0" title="CD_{i} = 0" /></a>发生的概率。<a href="https://www.codecogs.com/eqnedit.php?latex=\delta()" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\delta()" title="\delta()" /></a>当且仅当<a href="https://www.codecogs.com/eqnedit.php?latex=\sum_{k=1}^{K}CD_{i,k}=0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\sum_{k=1}^{K}CD_{i,k}=0" title="\sum_{k=1}^{K}CD_{i,k}=0" /></a>时为1否则为0，所以<a href="https://www.codecogs.com/eqnedit.php?latex=cAcc" target="_blank"><img src="https://latex.codecogs.com/gif.latex?cAcc" title="cAcc" /></a>的取值范围是<a href="https://www.codecogs.com/eqnedit.php?latex=[0,1]" target="_blank"><img src="https://latex.codecogs.com/gif.latex?[0,1]" title="[0,1]" /></a>：
+Checkout Accuracy (cAcc):结账准确率，表示检测过程中<a href="https://www.codecogs.com/eqnedit.php?latex=CD_{i}&space;=&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?CD_{i}&space;=&space;0" title="CD_{i} = 0" /></a>发生的概率。<a href="https://www.codecogs.com/eqnedit.php?latex=\delta()" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\delta()" title="\delta()" /></a>当且仅当<a href="https://www.codecogs.com/eqnedit.php?latex=\sum_{k=1}^{K}CD_{i,k}=0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\sum_{k=1}^{K}CD_{i,k}=0" title="\sum_{k=1}^{K}CD_{i,k}=0" /></a>时为1否则为0，所以<a href="https://www.codecogs.com/eqnedit.php?latex=cAcc" target="_blank"><img src="https://latex.codecogs.com/gif.latex?cAcc" title="cAcc" /></a>的取值范围是<a href="https://www.codecogs.com/eqnedit.php?latex=[0,1]" target="_blank"><img src="https://latex.codecogs.com/gif.latex?[0,1]" title="[0,1]" /></a>：
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=cAcc=\frac{\sum_{i=1}^{N}\delta(\sum_{k=1}^{K}CD_{i,k},\quad0)}{N}&space;=\frac{\sum_{i=1}^{N}\delta(CD_{i},\quad0)}{N}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?cAcc=\frac{\sum_{i=1}^{N}\delta(\sum_{k=1}^{K}CD_{i,k},\quad0)}{N}&space;=\frac{\sum_{i=1}^{N}\delta(CD_{i},\quad0)}{N}" title="cAcc=\frac{\sum_{i=1}^{N}\delta(\sum_{k=1}^{K}CD_{i,k},\quad0)}{N} =\frac{\sum_{i=1}^{N}\delta(CD_{i},\quad0)}{N}" /></a>
 
-**Average Counting Distance (ACD):**平均计数距离，表示每个图像的平均计数错误。
+Average Counting Distance (ACD):平均计数距离，表示每个图像的平均计数错误。
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=ACD=\frac{1}{N}\sum_{i=1}^{N}\sum_{k=1}^{K}CD_{i,k}=\frac{1}{N}\sum_{i=1}^{N}CD_{i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?ACD=\frac{1}{N}\sum_{i=1}^{N}\sum_{k=1}^{K}CD_{i,k}=\frac{1}{N}\sum_{i=1}^{N}CD_{i}" title="ACD=\frac{1}{N}\sum_{i=1}^{N}\sum_{k=1}^{K}CD_{i,k}=\frac{1}{N}\sum_{i=1}^{N}CD_{i}" /></a>
 
-**Mean Category Counting Distance (mCCD):**平均类别计数距离，表示每个商品类别的计数误差的平均比率。
+Mean Category Counting Distance (mCCD):平均类别计数距离，表示每个商品类别的计数误差的平均比率。
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=mCCD=\frac{1}{K}\sum_{i=1}^{N}\frac{\sum_{i=1}^{N}CD_{i,k}}{\sum_{k=1}^{K}GT_{i,k}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?mCCD=\frac{1}{K}\sum_{i=1}^{N}\frac{\sum_{i=1}^{N}CD_{i,k}}{\sum_{k=1}^{K}GT_{i,k}}" title="mCCD=\frac{1}{K}\sum_{i=1}^{N}\frac{\sum_{i=1}^{N}CD_{i,k}}{\sum_{k=1}^{K}GT_{i,k}}" /></a>
 
-**Mean Category Intersection of Union (mCIoU):**平均类别交并比，表示每个类别预测值和真实值之间误差的平均值，就是每个类别检测结果IoU的平均值。
+Mean Category Intersection of Union (mCIoU):平均类别交并比，表示每个类别预测值和真实值之间误差的平均值，就是每个类别检测结果IoU的平均值。
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=mCIoU=\frac{1}{K}\sum_{i=1}^{N}\frac{\sum_{i=1}^{N}min(GT_{i,k},P_{i,k})}{\sum_{i=1}^{N}max(GT_{i,k},P_{i,k})}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?mCIoU=\frac{1}{K}\sum_{i=1}^{N}\frac{\sum_{i=1}^{N}min(GT_{i,k},P_{i,k})}{\sum_{i=1}^{N}max(GT_{i,k},P_{i,k})}" title="mCIoU=\frac{1}{K}\sum_{i=1}^{N}\frac{\sum_{i=1}^{N}min(GT_{i,k},P_{i,k})}{\sum_{i=1}^{N}max(GT_{i,k},P_{i,k})}" /></a>
 
@@ -91,6 +91,8 @@ Render：使用渲染图像去训练。对合成好的图像进行渲染，补�
 
 Syn+Render：用合成图像以及渲染图像一起去训练。
 
-下图是论文中展示的流程图，我正是根据这个流程图来复现论文中的效果，其过程在中有详细记录。
+下图是论文中展示的流程图，我正是根据这个流程图来复现论文中的效果，其过程在[Recurring_experiment](https://github.com/tongyuhome/rpc/raw/master/Recurring_experiment.txt)
+
+中有详细记录。
 
 ![Pipeline](<https://github.com/tongyuhome/rpc/raw/master/show_images/Pipeline.png>)
