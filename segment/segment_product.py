@@ -235,7 +235,7 @@ def json2npy(json_path, datatype):
             sku_info[idx]['point_xy'] = info['point_xy']
         npy_path = os.path.join(json_path,datatype+'_NIBP')
         np.save(npy_path, sku_info)
-        print('—————————— Complete json2npy in {} seconds ——————————'.format(round(time.time() - start, 4)))
+        print('f'Complete {"json2npy":^9} in {format(round(time.time() - start, 4):^8} seconds'))
 
 
 if __name__ == '__main__':
