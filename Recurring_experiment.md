@@ -45,6 +45,8 @@
 
    ![seg_res](show_images/occupation.png)
 
+同样放上来的这份[code](synthesize/synthesize_product.py)是一次合成一张图的完整流程，如果硬件允许的话使用多进程会高效很多，合成的时间取决于要黏贴的图像数量，少则几毫秒多则几秒。
+
 ## 渲染
 
 合成的商品结算图像和真实的之间存在光影效果的缺失，论文提出用CycleGAN([Project](<https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix>)，[Paper](<https://arxiv.org/pdf/1703.10593.pdf>))来进行渲染添加光影效果，对两个域进行转换。对于风格转换来说，两个域之间的转换需要训练相对应的网络模型来实现，因此需要多次实验来调整训练以实现网络模型能生成预计效果。
